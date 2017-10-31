@@ -109,8 +109,8 @@ public class HomeController {
 		
 /*
 // 네이버
- 		String smtp_username ="shlise77";
-		String smtp_password ="qaz1023plm";
+ 		String smtp_username ="";
+		String smtp_password ="";
 		*/
 		//String CONFIGSET ="ConfigSet";
 		

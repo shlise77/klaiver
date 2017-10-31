@@ -36,8 +36,7 @@
 	
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 	<property name="basenames">
-	<list>
-	
+	<list>	
 	<!-- 메세지 파일의 위치를 지정합니다. message_언어.properties 파일을 찾습니다. -->
 	<value>/WEB-INF/messages/message</value>
 	</list>
