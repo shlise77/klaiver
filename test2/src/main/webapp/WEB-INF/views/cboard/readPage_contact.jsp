@@ -11,16 +11,60 @@
 <meta charset="utf-8" />
 <meta name="description" content="실시간 기업정보 서비스, 페이지, 정보공유" />
 
-<title>Klaiver 회사페이지(contact)</title>
-<link href="../resources/images/favicon.png" rel="shortcut icon"
-	type="image/png" />
-<link rel='stylesheet' type='text/css'
-	href='http://fonts.googleapis.com/css?family=Noto+Sans' />
-<link rel='stylesheet' type='text/css'
-	href='../resources/css/klaiver.css' />
+<style>
+	html,body,#map-canvas {
+		height: 400px;
+		margin: 0px;
+		padding: 0px
+	}
+</style>
+
+    <title>Klaiver 회사페이지(contact)</title>
+ <link href="../resources/images/favicon.png" rel="shortcut icon" type="image/png" />
+    <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Noto+Sans' />
+    <link rel='stylesheet' type='text/css' href='../resources/css/klaiver.css' />
+    <script src="../resources/js/jquery-1.11.2.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=?" ></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+
+ $(document).ready(function initMap(){
+	 
+	var faddr="${k_contactVO.address}"//주소
+	var geocoder;
+	geocoder = new google.maps.Geocoder();
+	geocoder.geocode( { 'address': faddr}, function(results, status) {
+		
+		if (status == google.maps.GeocoderStatus.OK) {
+			var faddr_lat = results[0].geometry.location.lat();	//위도
+			var faddr_lng = results[0].geometry.location.lng();	//경도
+		} else {
+			var faddr_lat = "";
+			var faddr_lng = "";
+		}
+	    
+		/* 뭐하는 부분인지 알아 보기 
+		document.frm.sangchaji_faddr_lat.value = faddr_lat;
+		document.frm.sangchaji_faddr_lng.value = faddr_lng;
+		
+		alert('주소 : ' + faddr + '\n\n위도 : ' + faddr_lat + '\n\n경도 : ' + faddr_lng);
+		 */ 
+		
+			var maphap = {lat : faddr_lat, lng : faddr_lng };
+			var map = new google.maps.Map(document.getElementById('map-canvas'), {
+				zoom : 15,
+				center : maphap
+		});	
+			var marker = new google.maps.Marker({
+				 position: maphap,
+		         map: map
+		});    	
+	});
+});
+
+</script>
 
 
-<script src="../resources/js/jquery-1.11.2.js"></script>
 <script>
 	// 이미지 클릭시 원본 크기로 팝업 보기
 	function doImgPop(img) {
@@ -246,9 +290,12 @@ function myComfollower(code){
 						<td class="data"><span id="corporate_form">${k_contactVO.email}</span></td>
 					</tr>
 					<tr>
-						<td class="list">주소</td>
-						<td class="data"><span id="owner_name">${k_contactVO.address}</span></td>
-					</tr>
+                         <td class="list">주소</td>
+                         <td class="data">
+                         <div id="map-canvas">
+                         </div>                                                    
+                         </td>
+                    </tr>
 					<tr>
 						<td class="list">조직도</td>
 						<td class="data"><c:forEach items="${group}" var="group">

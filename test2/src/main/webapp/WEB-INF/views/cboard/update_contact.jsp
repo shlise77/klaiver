@@ -230,8 +230,10 @@ $(document).ready(function () {
                         <input class="info_enter" type="text" id="input23" name="email" value="${k_contactVO.email}"/>
                     </div>
                     <div class="array">
+                        <div id="map"></div>
                         <span>주소</span>
                         <input class="info_enter" type="text" id="input24" name="address" value="${k_contactVO.address}"/>
+                        <button name="subject" class="btn-address" ></button>
                     </div>
                     <div class="array">
                         <span>조직도</span>

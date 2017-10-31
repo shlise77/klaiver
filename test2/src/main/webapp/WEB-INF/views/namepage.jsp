@@ -286,7 +286,7 @@ function login() {
                     <div>
                     <button class="sub_btn" name="sub_bt1" id="sub_bt1" type="button" title="전송" > 확인</button>
                     </div>
-                    <input class="info" type="password" id="password" name="password" placeholder="<spring:message code="site.password"/>" />
+                    <input class="info" type="password" id="password" name="password" placeholder="<spring:message code="site.password"/>"/>
                     <font name="check1" size="2" color="red"></font>
                     <input class="info" type="password" id="confirm_pw" name="confirm_pw" placeholder="<spring:message code="site.repassword"/>" />
                     <font name="check" size="2" color="red"></font>
