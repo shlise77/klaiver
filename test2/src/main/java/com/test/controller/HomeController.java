@@ -100,12 +100,12 @@ public class HomeController {
 	}
 	private boolean sendEmail(String email, String authNum)throws Exception {
 		String charSet = "utf-8";
-		String from ="taraval0707@gmail.com";
+		String from ="";
 		String to =email;
-	
+	    // 구글 계정 프로젝트 끝나고 넣기
 		//구글
-		String smtp_username ="taraval0707@gmail.com";
-		String smtp_password ="ber1023^asD";
+		String smtp_username ="";
+		String smtp_password ="";
 		
 /*
 // 네이버
