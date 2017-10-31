@@ -112,6 +112,7 @@ function login() {
 			var checkpass = $('#confirm_pw').val();
 			var email = $('#mail').val();
 			var checkemail = $('#confirm_mail').val();
+			var auth = $('#sub_min').val();
 			
 			if(password!=password || email!=checkemail){
 				alert("입력정보를 확인해 주세요");
@@ -122,6 +123,9 @@ function login() {
 			}else if(email == '' || checkemail== ''){
 				alert("이메일 을 확인을 해 주세요");
 				return false;
+			}else if(email != auth || auth==null ){
+			   	alert("이메일 인증을 해주세요")
+			   	return false;
 			}else{
 				$("#stage1").submit();
 			}	
