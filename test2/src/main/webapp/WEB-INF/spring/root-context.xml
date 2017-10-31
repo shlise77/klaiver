@@ -32,7 +32,31 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="10485760"></property>
 	</bean>
-
+	<!-- MessageSource -->
+	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	<property name="basenames">
+	<list>
+	
+	<!-- 메세지 파일의 위치를 지정합니다. message_언어.properties 파일을 찾습니다. -->
+	<value>/WEB-INF/messages/message</value>
+	</list>
+	</property>
+	
+	<!-- 파일의 기본 인코딩을 지정합니다. -->
+	<property name="defaultEncoding" value="UTF-8"/>
+	
+	<!-- properties 파일이 변경되었는지 확인하는 주기를 지정합니다. 60초 간격으로 지정했습니다. -->
+	<property name="cacheSeconds" value="60"/>
+	</bean>
+	<!-- 언어 정보를 세션에 저장하여 사용합니다. <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" /> -->
+	
+	<!-- 언어 정보를 쿠키에 저장하여 사용합니다. -->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+	<property name="cookieName" value="clientlanguage"/>
+	<property name="cookieMaxAge" value="100000"/>
+	<property name="cookiePath" value="web/cookie"/>
+	</bean>
 
 	<context:component-scan base-package="com.test.service"></context:component-scan>
 	<context:component-scan base-package="com.test.persistence"></context:component-scan>

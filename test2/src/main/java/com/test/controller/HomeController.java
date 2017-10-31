@@ -1,16 +1,15 @@
 package com.test.controller;
 
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.HtmlEmail;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,6 +53,12 @@ public class HomeController {
 	private AdminService admin;
 	
 	private JoinOne jo;
+	
+	// 인증번호
+	private String authNum = "";
+	// 이메일
+	private String email = "";
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 * 
@@ -93,6 +98,141 @@ public class HomeController {
 			return "redirect:./signhap";
 
 	}
+	private boolean sendEmail(String email, String authNum)throws Exception {
+		String charSet = "utf-8";
+		String from ="taraval0707@gmail.com";
+		String to =email;
+	
+		//구글
+		String smtp_username ="taraval0707@gmail.com";
+		String smtp_password ="ber1023^asD";
+		
+/*
+// 네이버
+ 		String smtp_username ="shlise77";
+		String smtp_password ="qaz1023plm";
+		*/
+		//String CONFIGSET ="ConfigSet";
+		
+		String host ="smtp.gmail.com";
+		int port =587; //smpt포트
+		String subject ="Klaiver 인증번호 전달";
+		String Name ="Kiaver 관리자 입니다.";
+		String content ="인증번호["+authNum+"]입니다."
+				+ "<br/>문의 사항은"
+				+ "developer@klaiver.com <br/>"
+				+ "으로 보내 주시기 바랍니다. ";
+		System.out.println(from);
+		System.out.println(email);
+		System.out.println(content);
+		
+		
+		try{
+			HtmlEmail emails = new HtmlEmail();
+			emails.setDebug(true);
+			emails.setCharset(charSet);
+			emails.setSSL(true);
+			emails.setHostName(host);
+			emails.setSmtpPort(port);
+			
+			emails.setAuthentication(smtp_username, smtp_password);
+			emails.setTLS(true);
+			emails.addTo(to,charSet);
+			emails.setFrom(from, Name, charSet);
+			emails.setSubject(subject);
+			emails.setHtmlMsg(content);
+			emails.send();
+			
+		}catch (Exception e) {
+			System.out.println(e);
+		}/*
+		
+		Properties props = System.getProperties();
+    	props.put("mail.transport.protocol", "smtp");
+    	props.put("mail.smtp.port", port); 
+    	props.put("mail.smtp.ssl.enable", "true");
+    	props.put("mail.smtp.auth", "true");
+
+        // Create a Session object to represent a mail session with the specified properties. 
+    	Session session = Session.getDefaultInstance(props);
+
+        // Create a message with the specified information. 
+        MimeMessage msg = new MimeMessage(session);
+        msg.setFrom(new InternetAddress(from));
+        msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+        msg.setSubject(subject);
+        msg.setContent(content,"text/html; charset=UTF-8");
+        
+        // Add a configuration set header. Comment or delete the 
+        // next line if you are not using a configuration set
+     //   msg.setHeader("X-SES-CONFIGURATION-SET", CONFIGSET);
+            
+        // Create a transport.
+        Transport transport = session.getTransport();
+                    
+        // Send the message.
+        try
+        {
+            System.out.println("Sending...");
+            
+            // Connect to Amazon SES using the SMTP username and password you specified above.
+            transport.connect(host, smtp_username, smtp_password);
+        	
+            // Send the email.
+            transport.sendMessage(msg, msg.getAllRecipients());
+            System.out.println("Email sent!");
+            
+            return true;
+        }
+        catch (Exception ex) {
+            System.out.println("The email was not sent.");
+            System.out.println("Error message: " + ex.getMessage());
+            
+            return false;
+        }
+        finally
+        {
+            transport.close();
+        }
+*/
+		return false;		
+	}
+
+	private String RandomNom() {
+		StringBuffer buffer = new StringBuffer();
+		for(int i=0; i<=6;i++){
+			int n = (int) (Math.random()*10);
+			buffer.append(n);
+		}
+		return buffer.toString();
+	}
+
+	//email
+	@RequestMapping(value = "/emailsc", method = RequestMethod.POST)
+	public @ResponseBody boolean emailsPost(String email, Model model)
+			throws Exception {
+		this.email = email;
+		System.out.println("111111111"+email);
+		//String authNum = "";
+		  
+		authNum = RandomNom();
+		  
+		return sendEmail(email.toString(), authNum);
+	}
+	
+	//인증번호 비교 메소드
+	@RequestMapping(value = "/compareAuthNum", method = RequestMethod.POST)
+	public @ResponseBody boolean CompareAuthNumber(String authNum, Model model)
+			throws Exception {
+		
+		if(this.authNum.equals(authNum) == true){
+			if(authNum.equals("") == false)
+				return true;
+		}
+		
+		return false;
+	}
+	
 	/*
 	 * 5page view controller
 	 */
