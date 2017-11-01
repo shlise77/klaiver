@@ -1,10 +1,13 @@
 package com.test.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -64,6 +67,27 @@ public class HomeController {
 	 * 
 	 * @throws Exception
 	 */
+	
+	@RequestMapping(value="/serchpwtwo", method=RequestMethod.GET)
+	public void serchpwtwoGet(String id,HttpServletRequest request, Model model, JoinOne jo)throws Exception{
+		
+	}
+	@RequestMapping(value="/serchpwtwo", method=RequestMethod.POST)
+	public String serchpwtwoPost()throws Exception{
+		
+		return "redirect:./";
+	}
+	
+	@RequestMapping(value="/searchpw", method=RequestMethod.GET)
+	public void searchpwGet(String id,HttpServletRequest request, Model model, JoinOne jo)throws Exception{
+		
+	}
+	@RequestMapping(value="/searchpw", method=RequestMethod.POST)
+	public String searchpwPost()throws Exception{
+		
+		return "redirect:./serchpwtwo";
+	}
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(CategoryVO vo, Locale locale, HttpServletRequest request, Model model, HttpSession session)
 			throws Exception {
@@ -212,13 +236,24 @@ public class HomeController {
 	public @ResponseBody boolean emailsPost(String email, Model model)
 			throws Exception {
 		this.email = email;
-		System.out.println("111111111"+email);
+		String id = email;
+		System.out.println("email:"+email);
+		System.out.println("getemail:"+service.getid(id).size());
 		//String authNum = "";
-		  
-		authNum = RandomNom();
-		  
-		return sendEmail(email.toString(), authNum);
+		if(service.getid(id).size() > 0){
+			if(service.getid(id).get(0).getEmail().equals(email)){
+				System.out.println("같다");
+				authNum = RandomNom();
+				sendEmail(email.toString(), authNum);
+				
+				return true; 
+			}
+			
+		}
+
+		return false;
 	}
+	
 	
 	//인증번호 비교 메소드
 	@RequestMapping(value = "/compareAuthNum", method = RequestMethod.POST)

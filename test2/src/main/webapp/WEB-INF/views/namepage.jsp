@@ -248,7 +248,11 @@ function login() {
             <span id="enter">
                 <input type="password" id="pw" name="pw" placeholder='<spring:message code="site.password"/>' />
 	            <input type="email" id="email" name="email" placeholder="<spring:message code="site.email"/>" />
-            </span>       
+               
+            </span>
+            <div>
+              
+            </div>    
         </div>
     </header>
     <section id="container">
@@ -256,8 +260,10 @@ function login() {
         <p align="center" >
            <a href="<c:url value="/?lang=ko" />" >Korean</a>/
 	       <a href="<c:url value="/?lang=en" />">English</a>/
-	       <a href="<c:url value="/?lang=jp" />">Japanese</a>     
+	       <a href="<c:url value="/?lang=jp" />">Japanese</a>    
+	         
         </p>
+        <p align="center"><a href="./searchpw">아이디/비밀번호 찾기</a></p>
         
         
         

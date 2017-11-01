@@ -176,7 +176,7 @@
 					<img src="../resources/images/icon1.png" alt="개인페이지" /> <c:if
 						test="${fn:length(updatenewpost) ne 0}">new</c:if> </a></li>
 			<li class="icon2"><a
-				href="../cboard/companylist?userid=${sessionScope.login}"><div
+				href="../notes/sender?userid=${sessionScope.login}"><div
 						class="cover"></div> <img src="../resources/images/icon2.png"
 					alt="기업페이지" /></a></li>
 			<li class="icon3"><a href="../klogin/logout"><div
