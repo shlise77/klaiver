@@ -146,7 +146,7 @@ public class HomeController {
 		*/
 		//String CONFIGSET ="ConfigSet";
 		
-		String host ="smtp.gmail.com";
+		String host ="";
 		int port =587; //smpt포트
 		String subject ="Klaiver 인증번호 전달";
 		String Name ="Kiaver 관리자 입니다.";
