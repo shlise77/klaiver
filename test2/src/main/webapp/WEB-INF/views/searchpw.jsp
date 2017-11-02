@@ -32,8 +32,7 @@
 		
 		//이메일 인증 
 		  $("#sub_btn1").click(function(){
-			  var emails = $("#mail").val();  
-			  alert(emails)
+			  var emails = $("#mail").val(); 
 			  $.ajax({
 				 url : "./emailsc",
 				 type : 'post',
@@ -77,19 +76,22 @@
 		  $("#pw_btm").click(function(){
 				 var emails = $('#mail').val();
 				 var auth = $('#sub_min').val();
-				 alert("클릭");
-				 
-				 //if(emails != auth || auth == null){
-				 if(flag === false){
-					 alert("이메일 인증을 해주세요");
-					 return false;
-				 }else if (emails == ''){
-					 alert("이메일을 확인해 주세요");
-					 return false;
-					 
-				 }else{
-					 location.href="./serchpwtwo";
-				 }
+				 $.ajax({
+					 type : "get",
+					 data : {
+						 email : emails
+					 } ,success : function(data){
+						   if(flag === false){
+							 alert("이메일 인증을 해주세요");
+							 return false;
+						 }else if (email == ''){
+							 alert("이메일을 확인해 주세요");
+							 return false;							 
+						 }else{
+							 location.href="./serchpwtwo?email="+emails;
+						 }  
+					 } 
+				  });
 				 
 		  });		
 		});
@@ -139,6 +141,7 @@
                     </div>                   
                 </div>
                 <button class=join_btn  id="pw_btm">다음</button>
+                
              
         </div>
     </section>

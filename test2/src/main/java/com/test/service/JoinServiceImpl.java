@@ -27,6 +27,10 @@ public class JoinServiceImpl implements JoinService{
 		return joinDAO.getid(id);
 	}
 
-	
+	@Override
+	public void chpassword(String email) throws Exception {
+		joinDAO.chpassword(email);
+		
+	}
 
 }

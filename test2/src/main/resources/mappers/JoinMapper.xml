@@ -18,7 +18,13 @@
 	FROM
 	k_joinone where email=#{id};
 	</select>
-
+    
+ <update id="passwordchage" parameterType="JoinOne">
+      UPDATE k_joinone
+      set password = #{password} , salt = #{salt}
+      where email= #{email};
+ </update>
+    
 </mapper>
 
 

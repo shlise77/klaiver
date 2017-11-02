@@ -69,11 +69,18 @@ public class HomeController {
 	 */
 	
 	@RequestMapping(value="/serchpwtwo", method=RequestMethod.GET)
-	public void serchpwtwoGet(String id,HttpServletRequest request, Model model, JoinOne jo)throws Exception{
-		
+	public void serchpwtwoGET(String email, Model model, JoinOne jo)throws Exception{
+	System.out.println("get:"+email);
+	model.addAttribute("email", email);
+	
+	service.chpassword(email);
 	}
-	@RequestMapping(value="/serchpwtwo", method=RequestMethod.POST)
-	public String serchpwtwoPost()throws Exception{
+	
+	@RequestMapping(value="/serchpwtwo", method= RequestMethod.POST)
+	public String serchpwtwoPost(String email, Model model, JoinOne jo)throws Exception{
+	//post 에 get에 받아 놓은 id 값에 service.getpw(update)을 친후 비밀번호 수정 클릭
+		System.out.println("post:"+email);
+		model.addAttribute("email",email);
 		
 		return "redirect:./";
 	}
@@ -83,7 +90,8 @@ public class HomeController {
 		
 	}
 	@RequestMapping(value="/searchpw", method=RequestMethod.POST)
-	public String searchpwPost()throws Exception{
+	public String searchpwPost(String id,HttpServletRequest request, Model model, JoinOne jo)throws Exception{
+		
 		
 		return "redirect:./serchpwtwo";
 	}
@@ -124,12 +132,12 @@ public class HomeController {
 	}
 	private boolean sendEmail(String email, String authNum)throws Exception {
 		String charSet = "utf-8";
-		String from ="";
+		String from ="taraval0707@gmail.com";
 		String to =email;
 	    // 구글 계정 프로젝트 끝나고 넣기
 		//구글
-		String smtp_username ="";
-		String smtp_password ="";
+		String smtp_username ="taraval0707@gmail.com";
+		String smtp_password ="ber1023^asD";
 		
 /*
 // 네이버

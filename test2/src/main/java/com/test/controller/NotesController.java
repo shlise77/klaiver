@@ -162,8 +162,6 @@ public class NotesController {
 		System.out.println(nvo);
 		model.addAttribute("rsendform", this.nvo);
 		
-		System.out.println("??");
-		
 		return "redirect:../notes/fsender";
 	}
 	

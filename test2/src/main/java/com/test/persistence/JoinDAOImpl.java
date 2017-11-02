@@ -36,6 +36,12 @@ public class JoinDAOImpl implements JoinDAO{
 	}
 
 
+	@Override
+	public void chpassword(String email) throws Exception{
+		sqlSession.selectList(namespace+".passwordchage",email);
+		
+	}
+
 	
 	
 }
