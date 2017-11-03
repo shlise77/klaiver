@@ -3,8 +3,10 @@ package com.test.controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.ServletRequest;
@@ -72,16 +74,29 @@ public class HomeController {
 	public void serchpwtwoGET(String email, Model model, JoinOne jo)throws Exception{
 	System.out.println("get:"+email);
 	model.addAttribute("email", email);
-	
-	service.chpassword(email);
 	}
 	
 	@RequestMapping(value="/serchpwtwo", method= RequestMethod.POST)
-	public String serchpwtwoPost(String email, Model model, JoinOne jo)throws Exception{
+	public String serchpwtwoPost(String password,String email, Model model, JoinOne jo)throws Exception{
 	//post 에 get에 받아 놓은 id 값에 service.getpw(update)을 친후 비밀번호 수정 클릭
-		System.out.println("post:"+email);
+		
+		System.out.println("email:"+email);
+		System.out.println("password:"+password);
 		model.addAttribute("email",email);
 		
+		String passwords =password;
+		String salt =SHA256Util.generateSalt();
+		String newPassword = SHA256Util.getEncrypt(passwords, salt);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("email", email);
+		map.put("password", newPassword);
+		map.put("salt", salt);
+		service.chpassword(map);
+		
+		
+		
+		//	String salt ="" ;
+
 		return "redirect:./";
 	}
 	

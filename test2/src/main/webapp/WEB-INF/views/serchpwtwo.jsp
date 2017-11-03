@@ -62,26 +62,30 @@
 	$('#pw_new').click(function(){
 		var passwords = $('#password').val();
 		var checkpaass = $('#confirm_pw').val();
+		var emails = $('#emails').val();
+	    if(passwords != checkpaass ){
+			 alert("입력 정보를 입력해 주세요");
+		     return false;
+		}else if(passwords == '' || checkpaass == ''){
+			 alert("비밀번호를 입력해 주세요");
+			 return false
 		$.ajax({
 			url : "./serchpwtwo",
-			type : 'get',
+			type : 'post',
+		    
+			
 			data : {
-				 password : $('#password').val(),
-				 checkpass : $('#confirm_pw').val(),
-			},
-			success : function(data){
-			   if(passwords != checkpaass ){
-				   alert("입력 정보를 입력해 주세요");
-				   return false;
-			   }else if(passwords == '' || checkpaass == ''){
-				   alert("비밀번호를 입력해 주세요");
-				   return false
-			   }/*  else{
-				   location.href="./";
-			   }  */
+				 password : passwords,
+				 email : emails,
+				 confirm_pw : checkpaass
 			}
-		});		
+		});
+		}else {
+			alert("성공 입니다.");
+			 location.href="./";
+		}
 	  });
+	
 	});
 	</script>
 </head>
@@ -121,7 +125,7 @@
              <p><strong>Klaiver 새로운 비밀 번호를 입력해주세요.</strong></p>
                
                 <div class="info_box"> 
-                <input type="text" id="email" name="email" value=" ${email}"/>
+                <input type="hidden" id="emails" name="emails" value="${email}"/>
                      <input class="info" type="password" id="password" name="password" placeholder="새 비밀번호 입력"/>
                     <font name="check1" size="2" color="red"></font>
                     <input class="info" type="password" id="confirm_pw" name="confirm_pw" placeholder="새 비밀번호 확인" />

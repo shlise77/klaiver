@@ -263,7 +263,7 @@ function login() {
 	       <a href="<c:url value="/?lang=jp" />">Japanese</a>    
 	         
         </p>
-        <p align="center"><a href="./searchpw">아이디/비밀번호 찾기</a></p>
+        <p align="center"><a href="./searchpw">비밀번호 찾기</a></p>
         
         
         

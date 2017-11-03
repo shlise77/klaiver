@@ -1,6 +1,7 @@
 package com.test.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -37,8 +38,8 @@ public class JoinDAOImpl implements JoinDAO{
 
 
 	@Override
-	public void chpassword(String email) throws Exception{
-		sqlSession.selectList(namespace+".passwordchage",email);
+	public void chpassword(Map<String, String> map) throws Exception{
+		sqlSession.update(namespace+".chpassword",map);
 		
 	}
 

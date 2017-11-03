@@ -1,6 +1,7 @@
 package com.test.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -28,8 +29,8 @@ public class JoinServiceImpl implements JoinService{
 	}
 
 	@Override
-	public void chpassword(String email) throws Exception {
-		joinDAO.chpassword(email);
+	public void chpassword(Map<String, String> map) throws Exception {
+		joinDAO.chpassword(map);
 		
 	}
 

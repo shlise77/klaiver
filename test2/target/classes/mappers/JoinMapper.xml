@@ -19,10 +19,10 @@
 	k_joinone where email=#{id};
 	</select>
     
- <update id="passwordchage" parameterType="JoinOne">
+ <update id="chpassword">
       UPDATE k_joinone
-      set password = #{password} , salt = #{salt}
-      where email= #{email};
+      set `password` = #{password} , salt = #{salt}
+      where email= #{email} ;
  </update>
     
 </mapper>
